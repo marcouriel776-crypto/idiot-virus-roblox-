@@ -4,9 +4,9 @@ local Config = {
 	SoundId = "rbxassetid://7266001792",
 	MaxAttempts = 10,
 	ChaosSpeed = 0.12,
-	FinalText = "Demasiado tarde...",
-	FaceText = "☻",
-	TitleText = "YOU ARE AN IDIOT 😈",
+	FinalText = "Stop Using Scripts...",
+	FaceText = "☻  ☻  ☻",
+	TitleText = "YOU ARE AN IDIOT",
 }
 
 local player = Players.LocalPlayer
@@ -111,7 +111,7 @@ local function createMainWindow()
 			final.Parent = gui
 
 			task.wait(2)
-			error("Connection lost 😈")
+			error("Connection lost")
 		end
 	end)
 end
