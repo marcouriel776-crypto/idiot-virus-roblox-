@@ -67,7 +67,7 @@ local function createMainWindow()
 	local button = Instance.new("TextButton")
 	button.Size = UDim2.new(0.2, 0, 0.08, 0)
 	button.Position = UDim2.new(0.4, 0, 0.86, 0)
-	button.Text = "Cerrar"
+	button.Text = "???"
 	button.TextScaled = true
 	button.Font = Enum.Font.SourceSansBold
 	button.Parent = frame
