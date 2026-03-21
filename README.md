@@ -1,23 +1,24 @@
-# idiot-virus-roblox-
-Roblox script
-Idiot Virus (Roblox Local Troll)
+# Idiot Virus (Roblox Local Troll)
 
-A chaotic local-only meme script inspired by "You Are An Idiot".
+A local-only chaotic meme UI inspired by "You Are An Idiot".
 
-Features
-
-- Fullscreen chaotic UI
+## Features
+- Fullscreen UI
 - Looping sound
 - Fake close button
-- Window multiplication
-- Fake crash ending
+- Window duplication
+- Chaos movement
+- Final fake crash
 
-Notes
+## Files
+- `Config.lua` — settings
+- `IdiotVirus.lua` — main module
+- `ClientInit.lua` — bootstrap local script
 
-- Runs locally only
-- Does not affect other players
-- Intended for testing / fun environments
+## Usage
+Place the scripts in a client-side location such as:
+- `StarterPlayerScripts`
+- `StarterGui`
 
-Usage
-
-Execute as a LocalScript inside PlayerGui or StarterPlayerScripts.
+## Notes
+This script is local-only and is intended for testing, meme experiences, or private environments.
