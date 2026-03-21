@@ -1,16 +1,16 @@
+local Players = game:GetService("Players")
+
+local Config = require(script.Parent:WaitForChild("Config"))
+
 local IdiotVirus = {}
 
-IdiotVirus.Config = {
-	SoundId = "rbxassetid://7266001792",
-	MaxWindows = 6,
-	MaxAttempts = 10,
-	ChaosSpeed = 0.2,
-	TitleText = "YOU ARE AN IDIOT 😈",
-	FinalText = "Demasiado tarde...",
-}
-
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
+local function inverseColor(isBlack)
+	if isBlack then
+		return Color3.new(0, 0, 0), Color3.new(1, 1, 1)
+	else
+		return Color3.new(1, 1, 1), Color3.new(0, 0, 0)
+	end
+end
 
 function IdiotVirus:Run()
 	local player = Players.LocalPlayer
@@ -27,85 +27,81 @@ function IdiotVirus:Run()
 
 	local sound = Instance.new("Sound")
 	sound.Name = "IdiotVirusSound"
-	sound.SoundId = self.Config.SoundId
+	sound.SoundId = Config.SoundId
 	sound.Looped = true
 	sound.Volume = 5
 	sound.Parent = gui
 	sound:Play()
 
-	local closeAttempts = 0
-	local windows = {}
+	local attempts = 0
 
-	local function createWindow()
+	local function createMainWindow()
 		local frame = Instance.new("Frame")
-		frame.Size = UDim2.new(0.4, 0, 0.3, 0)
-		frame.Position = UDim2.new(math.random() * 0.6, 0, math.random() * 0.7, 0)
-		frame.BackgroundColor3 = Color3.new(math.random(), math.random(), math.random())
+		frame.Size = UDim2.new(1, 0, 1, 0)
+		frame.Position = UDim2.new(0, 0, 0, 0)
 		frame.BorderSizePixel = 0
 		frame.Parent = gui
 
-		local text = Instance.new("TextLabel")
-		text.Size = UDim2.new(1, 0, 0.7, 0)
-		text.BackgroundTransparency = 1
-		text.Text = self.Config.TitleText
-		text.TextScaled = true
-		text.TextColor3 = Color3.new(1, 0, 0)
-		text.Parent = frame
+		local face = Instance.new("TextLabel")
+		face.Size = UDim2.new(1, 0, 0.7, 0)
+		face.Position = UDim2.new(0, 0, 0.12, 0)
+		face.BackgroundTransparency = 1
+		face.Text = "☻"
+		face.TextScaled = true
+		face.Font = Enum.Font.SourceSansBold
+		face.Parent = frame
 
 		local button = Instance.new("TextButton")
-		button.Size = UDim2.new(0.5, 0, 0.25, 0)
-		button.Position = UDim2.new(0.25, 0, 0.72, 0)
+		button.Size = UDim2.new(0.2, 0, 0.08, 0)
+		button.Position = UDim2.new(0.4, 0, 0.86, 0)
 		button.Text = "Cerrar"
 		button.TextScaled = true
+		button.Font = Enum.Font.SourceSansBold
 		button.Parent = frame
 
-		local alive = true
+		local running = true
 
 		task.spawn(function()
-			while alive and frame.Parent do
-				frame.Position = UDim2.new(math.random() * 0.7, 0, math.random() * 0.7, 0)
-				frame.BackgroundColor3 = Color3.new(math.random(), math.random(), math.random())
-				task.wait(self.Config.ChaosSpeed)
+			local black = true
+			while running and frame.Parent do
+				local bg, fg = inverseColor(black)
+				frame.BackgroundColor3 = bg
+				face.TextColor3 = fg
+				button.BackgroundColor3 = fg
+				button.TextColor3 = bg
+				black = not black
+				task.wait(Config.ChaosSpeed or 0.12)
 			end
 		end)
 
 		button.MouseButton1Click:Connect(function()
-			closeAttempts += 1
-			alive = false
+			attempts += 1
+			running = false
 			frame:Destroy()
 
-			if closeAttempts < self.Config.MaxAttempts then
-				task.delay(1, function()
+			if attempts < Config.MaxAttempts then
+				task.delay(0.8, function()
 					if gui.Parent then
-						createWindow()
+						createMainWindow()
 					end
 				end)
 			else
-				for _, child in ipairs(gui:GetChildren()) do
-					if child:IsA("Frame") then
-						child:Destroy()
-					end
-				end
-
 				local final = Instance.new("TextLabel")
 				final.Size = UDim2.new(1, 0, 1, 0)
 				final.BackgroundColor3 = Color3.new(0, 0, 0)
-				final.TextColor3 = Color3.new(1, 0, 0)
+				final.TextColor3 = Color3.new(1, 1, 1)
 				final.TextScaled = true
-				final.Text = self.Config.FinalText
+				final.Font = Enum.Font.SourceSansBold
+				final.Text = Config.FinalText or "Demasiado tarde..."
 				final.Parent = gui
 
 				task.wait(2)
 				error("Connection lost 😈")
 			end
 		end)
-
-		table.insert(windows, frame)
 	end
 
-	for _ = 1, math.min(3, self.Config.MaxWindows) do
-		createWindow()
-	end
+	createMainWindow()
 end
 
 return IdiotVirus
