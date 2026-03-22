@@ -4,7 +4,7 @@ local Config = {
 	SoundId = "rbxassetid://7266001792",
 	MaxAttempts = 10,
 	ChaosSpeed = 0.12,
-	FinalText = "⚠︎ Lock Your Screen Leave The Experience ⚠︎",
+	FinalText = "⚠︎ Lock Your Screen ⚠︎",
 	FaceText = "☻  ☻  ☻",
 	TitleText = "You Are An Idiot",
 }
