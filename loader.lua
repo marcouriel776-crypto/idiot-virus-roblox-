@@ -4,9 +4,9 @@ local Config = {
 	SoundId = "rbxassetid://7266001792",
 	MaxAttempts = 10,
 	ChaosSpeed = 0.12,
-	FinalText = "Stop Using Scripts...",
+	FinalText = "Oops, your screen is locked...",
 	FaceText = "☻  ☻  ☻",
-	TitleText = "YOU ARE AN IDIOT",
+	TitleText = "You Are An Idiot",
 }
 
 local player = Players.LocalPlayer
@@ -67,7 +67,7 @@ local function createMainWindow()
 	local button = Instance.new("TextButton")
 	button.Size = UDim2.new(0.2, 0, 0.08, 0)
 	button.Position = UDim2.new(0.4, 0, 0.86, 0)
-	button.Text = "???"
+	button.Text = "HAHAHAHAHA"
 	button.TextScaled = true
 	button.Font = Enum.Font.SourceSansBold
 	button.Parent = frame
